@@ -10,6 +10,11 @@ class FollowsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to request.referrer }
     end
+
+    respond_to do |format|
+      # ...html response
+      format.json { render json: current_user.slice(:id, :username) }
+    end
   end
 
   def destroy
@@ -26,5 +31,11 @@ class FollowsController < ApplicationController
       # See https://api.rubyonrails.org/classes/ActionController/Redirecting.html#method-i-redirect_to
       format.html { redirect_to request.referrer, status: :see_other }
     end
+
+    respond_to do |format|
+      # ...html response
+      format.json { render json: current_user.slice(:id) }
+    end
+    
   end
 end
